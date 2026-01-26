@@ -121,9 +121,17 @@ def main():
 
     deputados = fetch_deputados_em_exercicio(id_leg)
     dep_map = {int(d["id"]): d for d in deputados if "id" in d}
-
+    
+print("DEBUG: id_legislatura =", id_leg)
+print("DEBUG: deputados retornados =", len(deputados))
+if len(deputados) > 0:
+    print("DEBUG: primeiro deputado exemplo =", deputados[0])
+    
     despesas = fetch_cota_ano_json(ano)
-
+print("DEBUG: despesas retornadas =", len(despesas))
+if len(despesas) > 0:
+    print("DEBUG: primeiro item de despesa =", despesas[0])
+    
 def get_dep_id(item):
     if not isinstance(item, dict):
         return None
