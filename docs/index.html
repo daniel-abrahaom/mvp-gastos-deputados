@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gastos de Deputados (MVP)</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="container">
+    <h1>Gastos de Deputados (MVP)</h1>
+    <p class="sub">
+      Dados oficiais da Câmara dos Deputados — foco em despesas da Cota Parlamentar.
+      <a href="./metodologia.html">Metodologia</a>
+    </p>
+
+    <div class="controls">
+      <input id="q" type="search" placeholder="Buscar por nome do deputado..." />
+      <select id="uf"><option value="">UF (todas)</option></select>
+      <select id="partido"><option value="">Partido (todos)</option></select>
+    </div>
+
+    <div class="meta" id="meta">Carregando...</div>
+  </header>
+
+  <main class="container">
+    <h2>Deputados (ordenado por gasto no ano)</h2>
+    <div id="list" class="grid"></div>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>
