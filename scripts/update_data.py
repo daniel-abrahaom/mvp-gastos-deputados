@@ -60,29 +60,32 @@ def fetch_deputados_em_exercicio(id_leg: int) -> list:
     return data.get("dados", [])
 
 def fetch_cota_ano_json(ano: int) -> list:
- zip_url = f"https://www.camara.leg.br/cotas/Ano-{ano}.json.zip"
+    zip_url = f"https://www.camara.leg.br/cotas/Ano-{ano}.json.zip"
 
     b = download_bytes(zip_url)
 
     if len(b) < 4 or b[:2] != b"PK":
         snippet = b[:200].decode("utf-8", errors="replace")
-        raise RuntimeError(f"Download da cota NÃO retornou ZIP. Início da resposta:\n{snippet}")
+        raise RuntimeError(
+            "Download da cota NÃO retornou ZIP. Início da resposta:\n" + snippet
+        )
 
     z = zipfile.ZipFile(BytesIO(b))
     json_files = [n for n in z.namelist() if n.lower().endswith(".json")]
+
     if not json_files:
         raise RuntimeError("ZIP da cota não contém arquivo .json.")
 
     raw = z.read(json_files[0]).decode("utf-8", errors="replace")
     parsed = json.loads(raw)
 
-    # Formato A: {"dados":[...]}
-    if isinstance(parsed, dict) and "dados" in parsed and isinstance(parsed["dados"], list):
+    # Caso 1: {"dados": [...]}
+    if isinstance(parsed, dict) and "dados" in parsed:
         return parsed["dados"]
 
-    # Formato B: lista de objetos [{...}, {...}]
+    # Caso 2: lista direta
     if isinstance(parsed, list):
-        # Se vier como lista de strings ["{...}", "{...}"], converte para lista de dict
+        # lista de strings JSON
         if parsed and isinstance(parsed[0], str):
             out = []
             for s in parsed:
@@ -98,9 +101,10 @@ def fetch_cota_ano_json(ano: int) -> list:
                 except:
                     continue
             return out
+
         return parsed
 
-    raise RuntimeError ("Formato inesperado no JSON da cota (não é lista nem dict com 'dados').")
+    raise RuntimeError("Formato inesperado no JSON da cota.")
 
 def main():
     out_base = os.path.join("docs", "data")
@@ -120,8 +124,7 @@ def main():
 
     despesas = fetch_cota_ano_json(ano)
 
-    def get_dep_id(item):
-  # Se não for dicionário, ignora
+def get_dep_id(item):
     if not isinstance(item, dict):
         return None
 
@@ -134,6 +137,7 @@ def main():
         except:
             continue
     return None
+
 
     agg = {}
     for item in despesas:
