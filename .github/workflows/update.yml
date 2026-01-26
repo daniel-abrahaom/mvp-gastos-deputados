@@ -23,10 +23,24 @@ jobs:
       - name: Rodar atualização
         run: python scripts/update_data.py
 
+      - name: Mostrar arquivos gerados
+        run: |
+          echo "=== LISTANDO docs/data ==="
+          ls -la docs/data || true
+          echo "=== LISTANDO docs/data/detalhes (primeiros 20) ==="
+          ls -la docs/data/detalhes | head -n 20 || true
+          echo "=== METADATA (início) ==="
+          cat docs/data/metadata.json | head -c 500 || true
+          echo ""
+          echo "=== DEPUTADOS.JSON (início) ==="
+          cat docs/data/deputados.json | head -c 500 || true
+          echo ""
+
       - name: Commitar dados atualizados
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add docs/data
+          git status
           git commit -m "Atualiza dados (auto)" || echo "Sem mudanças"
           git push
