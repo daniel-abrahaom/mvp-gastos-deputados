@@ -28,23 +28,30 @@ def ensure_dir(path: str):
     os.makedirs(path, exist_ok=True)
 
 def pick_current_legislatura() -> int:
-    # HTTPS (mais estável)
-    leg_url = "https://dadosabertos.camara.leg.br/arquivos/legislaturas/json/legislaturas.json"
-    data = http_get_json(leg_url)
+ # Pega legislaturas pela API oficial v2 (mais estável)
+    url = f"{API_BASE}/legislaturas?itens=200&ordem=DESC&ordenarPor=id"
+    data = http_get_json(url)
     hoje = date.today()
 
     legs = data.get("dados", [])
     for leg in legs:
         di = leg.get("dataInicio")
         df = leg.get("dataFim")
-        if not di or not df:
+        leg_id = leg.get("id")
+        if not di or not df or leg_id is None:
             continue
-        di_d = date.fromisoformat(di)
-        df_d = date.fromisoformat(df)
-        if di_d <= hoje <= df_d:
-            return int(leg["id"])
 
-    ids = [int(l["id"]) for l in legs if "id" in l]
+        try:
+            di_d = date.fromisoformat(di)
+            df_d = date.fromisoformat(df)
+        except:
+            continue
+
+        if di_d <= hoje <= df_d:
+            return int(leg_id)
+
+    # fallback: maior id disponível
+    ids = [int(l.get("id")) for l in legs if l.get("id") is not None]
     return max(ids) if ids else 0
 
 def fetch_deputados_em_exercicio(id_leg: int) -> list:
