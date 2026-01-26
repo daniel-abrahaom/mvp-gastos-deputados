@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Metodologia — MVP</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header class="container">
+    <p><a href="./index.html">← Voltar</a></p>
+    <h1>Metodologia</h1>
+    <p class="sub">
+      Este site não faz análise política nem ranking moral.
+      Ele apenas organiza dados públicos oficiais.
+    </p>
+
+    <div class="meta" id="meta">Carregando...</div>
+  </header>
+
+  <main class="container">
+    <h2>Fontes oficiais</h2>
+    <ul>
+      <li><strong>Dados Abertos da Câmara</strong> (API e arquivos) — base do projeto.</li>
+      <li><strong>Cota Parlamentar</strong> — despesas da Cota para o Exercício da Atividade Parlamentar.</li>
+    </ul>
+
+    <h2>O que mostramos no MVP</h2>
+    <ul>
+      <li>Deputados em exercício na legislatura atual</li>
+      <li>Despesas da Cota no ano corrente (agregações + detalhes por deputado)</li>
+      <li>“Última atualização” com data/hora</li>
+    </ul>
+
+    <h2>Neutralidade</h2>
+    <p>
+      Não usamos jornais, opiniões ou textos interpretativos.
+      Apenas organizamos os dados e apontamos a fonte oficial.
+    </p>
+
+    <h2>Observação</h2>
+    <p>
+      Em alguns casos, o campo de “documento” pode não ter um link navegável.
+      Quando existir informação oficial, exibimos; quando não existir, deixamos em branco.
+    </p>
+  </main>
+
+  <script>
+    fetch("./data/metadata.json").then(r=>r.json()).then(m=>{
+      document.getElementById("meta").textContent =
+        `Última atualização: ${m.updated_at} · Ano: ${m.ano} · Legislatura: ${m.id_legislatura}`;
+    }).catch(()=>{ document.getElementById("meta").textContent=""; });
+  </script>
+</body>
+</html>
