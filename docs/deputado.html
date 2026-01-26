@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Deputado — Gastos (MVP)</title>
+  <link rel="stylesheet" href="./styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="container">
+    <p><a href="./index.html">← Voltar</a> · <a href="./metodologia.html">Metodologia</a></p>
+    <div id="perfil" class="perfil">Carregando perfil...</div>
+    <div class="meta" id="meta">Carregando...</div>
+  </header>
+
+  <main class="container">
+    <section class="cards" id="cards"></section>
+
+    <section class="panel">
+      <h2>Gasto por mês (ano corrente)</h2>
+      <canvas id="chartMes"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>Top categorias (ano corrente)</h2>
+      <canvas id="chartCat"></canvas>
+    </section>
+
+    <section class="panel">
+      <h2>Top fornecedores (ano corrente)</h2>
+      <div id="topFornecedores"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Lançamentos (ano corrente)</h2>
+      <div class="hint">Dica: você pode ordenar clicando nos títulos (no futuro). No MVP, é lista simples.</div>
+      <div class="tableWrap">
+        <table id="tabela">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Categoria</th>
+              <th>Fornecedor</th>
+              <th class="num">Valor (R$)</th>
+              <th>Documento</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="./deputado.js"></script>
+</body>
+</html>
