@@ -1,0 +1,39 @@
+:root { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+body { margin: 0; background: #0b0f14; color: #e6edf3; }
+a { color: #7ee787; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.container { max-width: 1050px; margin: 0 auto; padding: 18px; }
+h1 { margin: 0 0 6px; font-size: 26px; }
+h2 { margin: 18px 0 10px; font-size: 18px; }
+.sub { opacity: .85; margin: 0 0 12px; }
+.controls { display: grid; grid-template-columns: 1fr 140px 160px; gap: 10px; margin: 14px 0; }
+.controls input, .controls select {
+  background: #111826; color: #e6edf3; border: 1px solid #223041; border-radius: 10px;
+  padding: 10px 12px; outline: none;
+}
+.meta { opacity: .75; font-size: 13px; margin-top: 8px; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
+.card {
+  background: #0f1623; border: 1px solid #223041; border-radius: 14px; padding: 12px;
+  display: grid; gap: 8px;
+}
+.cardTop { display: flex; gap: 10px; align-items: center; }
+.avatar { width: 44px; height: 44px; border-radius: 10px; object-fit: cover; background: #111826; }
+.card strong { font-size: 14px; }
+.kpis { display: flex; gap: 10px; flex-wrap: wrap; opacity: .9; font-size: 13px; }
+.kpis span { background: #111826; border: 1px solid #223041; border-radius: 999px; padding: 6px 10px; }
+
+.perfil { display:flex; gap:14px; align-items:center; padding:12px; border-radius:14px;
+  background:#0f1623; border:1px solid #223041; margin-top:12px; }
+.perfil img { width:64px; height:64px; border-radius:12px; object-fit:cover; }
+.cards { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap:12px; margin: 12px 0; }
+.mini { background:#0f1623; border:1px solid #223041; border-radius:14px; padding:12px; }
+.mini .label { opacity:.75; font-size:12px; }
+.mini .value { font-size:18px; margin-top:6px; }
+.panel { background:#0f1623; border:1px solid #223041; border-radius:14px; padding:12px; margin:12px 0; }
+.hint { opacity:.7; font-size:12px; margin-bottom:8px; }
+.tableWrap { overflow:auto; }
+table { width:100%; border-collapse: collapse; font-size: 13px; }
+th, td { border-bottom: 1px solid #223041; padding: 8px; vertical-align: top; }
+th { text-align:left; opacity:.85; }
+.num { text-align:right; }
