@@ -60,14 +60,11 @@ def fetch_deputados_em_exercicio(id_leg: int) -> list:
     return data.get("dados", [])
 
 def fetch_cota_ano_json(ano: int) -> list:
-    # HTTPS (mais estável)
-    zip_url = f"https://www.camara.leg.br/cotas/Ano-{ano}.json.zip"
+ zip_url = f"https://www.camara.leg.br/cotas/Ano-{ano}.json.zip"
 
     b = download_bytes(zip_url)
 
-    # valida se veio ZIP mesmo (não HTML)
     if len(b) < 4 or b[:2] != b"PK":
-        # Geralmente significa que veio uma página HTML/erro
         snippet = b[:200].decode("utf-8", errors="replace")
         raise RuntimeError(f"Download da cota NÃO retornou ZIP. Início da resposta:\n{snippet}")
 
@@ -75,8 +72,35 @@ def fetch_cota_ano_json(ano: int) -> list:
     json_files = [n for n in z.namelist() if n.lower().endswith(".json")]
     if not json_files:
         raise RuntimeError("ZIP da cota não contém arquivo .json.")
+
     raw = z.read(json_files[0]).decode("utf-8", errors="replace")
-    return json.loads(raw)
+    parsed = json.loads(raw)
+
+    # Formato A: {"dados":[...]}
+    if isinstance(parsed, dict) and "dados" in parsed and isinstance(parsed["dados"], list):
+        return parsed["dados"]
+
+    # Formato B: lista de objetos [{...}, {...}]
+    if isinstance(parsed, list):
+        # Se vier como lista de strings ["{...}", "{...}"], converte para lista de dict
+        if parsed and isinstance(parsed[0], str):
+            out = []
+            for s in parsed:
+                if not isinstance(s, str):
+                    continue
+                s = s.strip()
+                if not s:
+                    continue
+                try:
+                    obj = json.loads(s)
+                    if isinstance(obj, dict):
+                        out.append(obj)
+                except:
+                    continue
+            return out
+        return parsed
+
+    raise RuntimeError ("Formato inesperado no JSON da cota (não é lista nem dict com 'dados').")
 
 def main():
     out_base = os.path.join("docs", "data")
@@ -97,15 +121,19 @@ def main():
     despesas = fetch_cota_ano_json(ano)
 
     def get_dep_id(item):
-        for k in ("idDeputado", "ideCadastro"):
-            v = item.get(k)
-            if v is None:
-                continue
-            try:
-                return int(v)
-            except:
-                continue
+  # Se não for dicionário, ignora
+    if not isinstance(item, dict):
         return None
+
+    for k in ("idDeputado", "ideCadastro"):
+        v = item.get(k)
+        if v is None:
+            continue
+        try:
+            return int(v)
+        except:
+            continue
+    return None
 
     agg = {}
     for item in despesas:
