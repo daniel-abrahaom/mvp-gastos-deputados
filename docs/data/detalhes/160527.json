@@ -1,1 +1,1 @@
-{"id": 160527, "ano": 2026, "mes_atual": "01", "gasto_ano": 0.0, "gasto_mes": 0.0, "por_mes": {}, "por_categoria": {}, "por_fornecedor": {}, "lancamentos": []}
+{"id": 160527, "ano": 2026, "mes_atual": "01", "gasto_ano": 229.48, "gasto_mes": 0.0, "por_mes": {}, "por_categoria": {"TELEFONIA": 229.48}, "por_fornecedor": {"CELULAR FUNCIONAL": 229.48}, "lancamentos": [{"data": "", "categoria": "TELEFONIA", "fornecedor": "CELULAR FUNCIONAL", "valor": 229.48, "documento_url": ""}]}

@@ -1,1 +1,1 @@
-{"id": 171623, "ano": 2026, "mes_atual": "01", "gasto_ano": 0.0, "gasto_mes": 0.0, "por_mes": {}, "por_categoria": {}, "por_fornecedor": {}, "lancamentos": []}
+{"id": 171623, "ano": 2026, "mes_atual": "01", "gasto_ano": 1299.99, "gasto_mes": 0.0, "por_mes": {}, "por_categoria": {"TELEFONIA": 1299.99}, "por_fornecedor": {"Telefônica Brasil S.A. VIVO": 1299.99}, "lancamentos": [{"data": "", "categoria": "TELEFONIA", "fornecedor": "Telefônica Brasil S.A. VIVO", "valor": 1299.99, "documento_url": ""}]}

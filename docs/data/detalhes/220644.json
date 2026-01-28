@@ -1,1 +1,1 @@
-{"id": 220644, "ano": 2026, "mes_atual": "01", "gasto_ano": 0.0, "gasto_mes": 0.0, "por_mes": {}, "por_categoria": {}, "por_fornecedor": {}, "lancamentos": []}
+{"id": 220644, "ano": 2026, "mes_atual": "01", "gasto_ano": 279.99, "gasto_mes": 0.0, "por_mes": {}, "por_categoria": {"TELEFONIA": 279.99}, "por_fornecedor": {"TIM S.A": 279.99}, "lancamentos": [{"data": "", "categoria": "TELEFONIA", "fornecedor": "TIM S.A", "valor": 279.99, "documento_url": ""}]}
