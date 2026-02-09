@@ -1,1 +1,1 @@
-{"id": 160598, "ano": 2026, "mes_atual": "02", "gasto_ano": 0.0, "gasto_mes": 0.0, "por_mes": {}, "por_categoria": {}, "por_fornecedor": {}, "lancamentos": []}
+{"id": 160598, "ano": 2026, "mes_atual": "02", "gasto_ano": 1200.0, "gasto_mes": 0.0, "por_mes": {}, "por_categoria": {"TELEFONIA": 1200.0}, "por_fornecedor": {"TELEFÔNICA BRASIL S/A - VIVO": 1200.0}, "lancamentos": [{"data": "", "categoria": "TELEFONIA", "fornecedor": "TELEFÔNICA BRASIL S/A - VIVO", "valor": 1200.0, "documento_url": "https://www.camara.leg.br/cota-parlamentar/documentos/publ/2229/2026/8047436.pdf"}]}
